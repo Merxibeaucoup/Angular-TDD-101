@@ -1,2 +1,2 @@
-import 'jest-preset-angular/serup-jest';
+import 'jest-preset-angular/setup-jest';
 import '@testing-library/jest-dom';
