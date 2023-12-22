@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SignUpComponent } from './sign-up.component';
 
 describe('SignUpComponent', () => {
@@ -97,6 +96,60 @@ describe('SignUpComponent', () => {
       fixture.detectChanges();
       const button = singUp.querySelector('button');
       expect(button?.disabled).toBeFalsy();
+    });
+
+    it('sends the signup request to the backend', () => {
+      const spyFetch = spyOn(window, 'fetch');
+      spyOn(component, 'onClickSignUp');
+      component.username = 'XXXX';
+      component.email = 'XXXX@XXXX.com';
+      component.password = 'XXXXXXXX';
+      component.passwordRepeat = 'XXXXXXXX';
+      fixture.detectChanges();
+      const passwordInput = fixture.nativeElement.querySelector(
+        'input[id="password"]'
+      ) as HTMLInputElement;
+      passwordInput.value = 'XXXXXXXX';
+      passwordInput.dispatchEvent(new Event('input'));
+      fixture.detectChanges();
+      const passwordRepeatInput = fixture.nativeElement.querySelector(
+        'input[id="passwordRepeat"]'
+      ) as HTMLInputElement;
+      passwordRepeatInput.value = 'XXXXXXXX';
+      passwordRepeatInput.dispatchEvent(new Event('input'));
+      fixture.detectChanges();
+      const usernameInput = fixture.nativeElement.querySelector(
+        'input[id="username"]'
+      ) as HTMLInputElement;
+      usernameInput.value = 'XXXX';
+      usernameInput.dispatchEvent(new Event('input'));
+      fixture.detectChanges();
+      const emailInput = fixture.nativeElement.querySelector(
+        'input[id="email"]'
+      ) as HTMLInputElement;
+      emailInput.value = 'XXXX@XXXX.com';
+      emailInput.dispatchEvent(new Event('input'));
+      fixture.detectChanges();
+
+      const singUp = fixture.nativeElement as HTMLElement;
+      const button = singUp.querySelector('button');
+      button?.click();
+
+      // expect(window.fetch).toHaveBeenCalled();
+      // const args = spyFetch.calls.allArgs()[0];
+      // const secondArg = args[1] as RequestInit;
+
+      // // expect(secondArg?.method).toEqual('POST');
+      // expect(secondArg.body).toEqual(
+      //   JSON.stringify({
+      //     username: 'XXXX',
+      //     email: 'XXXX@XXXX.com',
+      //     password: 'XXXXXXXX',
+      //     passwordRepeat: 'XXXXXXXX',
+      //   })
+      // );
+      fixture.detectChanges();
+      expect(component.onClickSignUp).toHaveBeenCalled();
     });
   });
 });

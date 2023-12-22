@@ -8,12 +8,24 @@ import { Component } from '@angular/core';
   styleUrl: './sign-up.component.scss',
 })
 export class SignUpComponent {
-  password = '';
-  passwordRepeat = '';
+  username: string = '';
+  email: string = '';
+  password: string = '';
+  passwordRepeat: string = '';
 
   onChnagePassword(event: Event) {
     event.preventDefault();
     this.password = (event.target as HTMLInputElement).value;
+  }
+
+  onChangeUsername(event: Event) {
+    event.preventDefault();
+    this.username = (event.target as HTMLInputElement).value;
+  }
+
+  onChangeEmail(event: Event) {
+    event.preventDefault();
+    this.email = (event.target as HTMLInputElement).value;
   }
 
   onChnagePasswordRepeat(event: Event) {
@@ -23,5 +35,19 @@ export class SignUpComponent {
 
   isDisabled() {
     return this.password ? this.password !== this.passwordRepeat : true;
+  }
+
+  onClickSignUp() {
+    fetch('/api/1.0/users', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: this.username,
+        email: this.email,
+        password: this.password,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   }
 }
