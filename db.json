@@ -4,49 +4,57 @@
       "id": 1,
       "name": "John Doe",
       "birthdate": "1990-01-01",
-      "birthplace": "New York, NY"
+      "birthplace": "New York, NY",
+      "priority": false
     },
     {
       "id": 9,
       "name": "Sean Oaul",
       "birthdate": "1990-01-01",
-      "birthplace": "Ontario, CT"
+      "birthplace": "Ontario, CT",
+      "priority": false
     },
     {
       "id": 10,
       "name": "Demba Ba",
       "birthdate": "1990-01-01",
-      "birthplace": "Zimbia, ZA"
+      "birthplace": "Zimbia, ZA",
+      "priority": true
     },
     {
       "id": 2,
       "name": "Jane Smith",
       "birthdate": "1995-05-15",
-      "birthplace": "Los Angeles, CA"
+      "birthplace": "Los Angeles, CA",
+      "priority": true
     },
     {
       "id": 3,
       "name": "Bob Johnson",
       "birthdate": "1985-12-10",
-      "birthplace": "Chicago, IL"
+      "birthplace": "Chicago, IL",
+      "priority": false
     },
     {
       "id": 4,
       "name": "Sarah Lee",
       "birthdate": "2000-07-05",
-      "birthplace": "Houston, TX"
+      "birthplace": "Houston, TX",
+      "priority": true
     },
     {
       "id": 5,
       "name": "Tom Brown",
       "birthdate": "1975-03-20",
-      "birthplace": "Philadelphia, PA"
+      "birthplace": "Philadelphia, PA",
+      "priority": true
     },
     {
       "id": 6,
       "name": "Emily Davis",
       "birthdate": "2002-09-12",
-      "birthplace": "Phoenix, AZ"
+      "birthplace": "Phoenix, AZ",
+      "priority": false
     }
   ]
 }

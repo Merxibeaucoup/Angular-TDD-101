@@ -8,23 +8,68 @@
     </tr>
   </thead>
   <tbody>
-    <ng-container *ngFor="let date of uniqueDates">
-      <tr>
-        <td colspan="4">
-          {{ date }}
-          <button class="toggle-button" (click)="toggleDate(date)">
-            Toggle
-          </button>
-        </td>
-      </tr>
-      <ng-container *ngIf="dateToggleStates[date]">
-        <tr *ngFor="let person of filterDataByDate(date)">
-          <td>{{ person.id }}</td>
-          <td>{{ person.name }}</td>
-          <td>{{ person.birthdate }}</td>
-          <td>{{ person.birthplace }}</td>
+    <!-- Row to display total number of persons -->
+    <tr>
+      <td colspan="4" (click)="toggleIsTotalActive()" style="cursor: pointer">
+        Total Persons: {{ getTotalPersons() }}
+      </td>
+    </tr>
+    <!-- priority List -->
+    <tr *ngIf="isTotalActive && isPriorityData.length > 0">
+      <td colspan="4" (click)="togglePriorityList()">
+        Priority List {{ isPriorityData.length }}
+        <button class="toggle-button">Toggle</button>
+      </td>
+    </tr>
+    <ng-container *ngIf="isPriorityListActive">
+      <ng-container *ngFor="let date of uniquePriorityDates">
+        <tr>
+          <td colspan="4">
+            {{ date }}
+            <button class="toggle-button" (click)="toggleDate(date)">
+              Toggle
+            </button>
+          </td>
         </tr>
+        <ng-container *ngIf="dateToggleStates[date]">
+          <tr *ngFor="let person of filterPriorityDataByDate(date)">
+            <td>{{ person.id }}</td>
+            <td>{{ person.name }}</td>
+            <td>{{ person.birthdate }}</td>
+            <td>{{ person.birthplace }}</td>
+          </tr>
+        </ng-container>
       </ng-container>
     </ng-container>
+
+    <!-- Normal List -->
+    <tr *ngIf="isTotalActive && isNormalData.length > 0">
+      <td colspan="4" (click)="toggleNormalList()">
+        Normal List {{ isNormalData.length }}
+        <button class="toggle-button">Toggle</button>
+      </td>
+    </tr>
+    <ng-container *ngIf="isNormalListActive">
+      <ng-container *ngFor="let date of uniqueNormalDates">
+        <tr>
+          <td colspan="4">
+            {{ date }}
+            <button class="toggle-button" (click)="toggleDate(date)">
+              Toggle
+            </button>
+          </td>
+        </tr>
+        <ng-container *ngIf="dateToggleStates[date]">
+          <tr *ngFor="let person of filterNormalDataByDate(date)">
+            <td>{{ person.id }}</td>
+            <td>{{ person.name }}</td>
+            <td>{{ person.birthdate }}</td>
+            <td>{{ person.birthplace }}</td>
+          </tr>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <!-- Loop through unique dates -->
   </tbody>
 </table>
