@@ -1,0 +1,30 @@
+<table class="data-table">
+  <thead>
+    <tr>
+      <th style="width: 100px">ID</th>
+      <th style="width: 200px">Name</th>
+      <th style="width: 150px">Birthdate</th>
+      <th style="width: 250px">Birthplace</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let date of uniqueDates">
+      <tr>
+        <td colspan="4">
+          {{ date }}
+          <button class="toggle-button" (click)="toggleDate(date)">
+            Toggle
+          </button>
+        </td>
+      </tr>
+      <ng-container *ngIf="dateToggleStates[date]">
+        <tr *ngFor="let person of filterDataByDate(date)">
+          <td>{{ person.id }}</td>
+          <td>{{ person.name }}</td>
+          <td>{{ person.birthdate }}</td>
+          <td>{{ person.birthplace }}</td>
+        </tr>
+      </ng-container>
+    </ng-container>
+  </tbody>
+</table>

@@ -1,0 +1,52 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Set the wrapper height to fill the entire viewport */
+}
+
+.rectangle-1,
+.rectangle-2 {
+  flex: 1; /* Make the rectangles equally share the available space */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #fd4140;
+  border: solid 1px #121621;
+  color: #121621;
+  margin: auto;
+}
+
+.container {
+  position: absolute;
+  top: 0; /* Always stay at the top of the rectangle */
+  left: 0; /* Optionally adjust the left position */
+  right: 0; /* Optionally adjust the right position */
+  bottom: 0; /* Optionally adjust the bottom position */
+  padding: 10px; /* Optionally add padding */
+}
+
+mwlResizable {
+  box-sizing: border-box; // required for the enableGhostResize option to work
+}
+
+.resize-handle-top,
+.resize-handle-bottom {
+  position: absolute;
+  height: 5px;
+  cursor: row-resize;
+  width: 100%;
+}
+
+.resize-handle-top {
+  top: 0;
+}
+
+.resize-handle-bottom {
+  bottom: 0;
+}
+
+.rectangle-2 {
+  background-color: yellow;
+}
