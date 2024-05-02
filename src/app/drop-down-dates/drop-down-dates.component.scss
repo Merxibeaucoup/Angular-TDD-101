@@ -3,6 +3,10 @@
   border-collapse: collapse;
 }
 
+.data-table th {
+  text-align: left;
+}
+
 .data-table th,
 .data-table td {
   padding: 8px;
@@ -16,4 +20,25 @@
 .column {
   display: inline-block;
   white-space: nowrap;
+}
+/* Style for the resizable handle */
+.resizable {
+  position: relative;
+}
+
+.resizable::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -5px; /* Adjust based on your preference */
+  bottom: 0;
+  width: 10px; /* Width of the resize handle */
+  cursor: col-resize; /* Cursor style */
+  background: transparent;
+  z-index: 1;
+}
+
+/* Style for the handle when hovering */
+.resizable:hover::after {
+  background: rgba(0, 0, 0, 0.1);
 }

@@ -1,20 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { Observable, catchError, tap, throwError } from 'rxjs';
+import { ResizableColumnDirective } from '../directives/resizablecolumn.directive';
 
 @Component({
   selector: 'app-drop-down-dates',
   standalone: true,
-  imports: [HttpClientModule, CommonModule],
+  imports: [HttpClientModule, CommonModule, ResizableColumnDirective],
   templateUrl: './drop-down-dates.component.html',
   styleUrl: './drop-down-dates.component.scss',
 })
 export class DropDownDatesComponent implements OnInit {
   personData: any = [];
-  // uniqueDates: any[] = [];
-  // selectedDate: string | null = null;
-  // filteredData: any[] = [];
   dateToggleStates: { [key: string]: boolean } = {};
   isTotalActive: boolean = false;
   isPriorityListActive: boolean = false;
@@ -23,7 +21,16 @@ export class DropDownDatesComponent implements OnInit {
   isPriorityData: any[] = [];
   isNormalData: any[] = [];
 
+  @HostBinding('style.width.px')
+  width: number | null = null;
+
   constructor(private _http: HttpClient) {}
+
+  onColumnResize(width: number) {
+    this.width = width;
+    // Handle the width change, e.g., update the style or store the width in a variable
+    console.log('Column resized to width:', width);
+  }
 
   ngOnInit(): void {
     this.getPersonData().subscribe(
