@@ -1,75 +1,103 @@
-<table class="data-table">
-  <thead>
-    <tr>
-      <th class="resizable" resizableColumn style="width: 100px">ID</th>
-      <th class="resizable" resizableColumn style="width: 200px">Name</th>
-      <th class="resizable" resizableColumn style="width: 150px">Birthdate</th>
-      <th class="resizable" resizableColumn style="width: 250px">Birthplace</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Row to display total number of persons -->
-    <tr>
-      <td colspan="4" (click)="toggleIsTotalActive()" style="cursor: pointer">
-        Total Persons: {{ getTotalPersons() }}
-      </td>
-    </tr>
-    <!-- priority List -->
-    <tr *ngIf="isTotalActive && isPriorityData.length > 0">
-      <td colspan="4" (click)="togglePriorityList()">
-        Priority List {{ isPriorityData.length }}
-        <button class="toggle-button">Toggle</button>
-      </td>
-    </tr>
-    <ng-container *ngIf="isPriorityListActive">
-      <ng-container *ngFor="let date of uniquePriorityDates">
-        <tr>
-          <td colspan="4">
-            {{ date }}
-            <button class="toggle-button" (click)="toggleDate(date)">
-              Toggle
-            </button>
-          </td>
-        </tr>
-        <ng-container *ngIf="dateToggleStates[date]">
-          <tr *ngFor="let person of filterPriorityDataByDate(date)">
-            <td>{{ person.id }}</td>
-            <td>{{ person.name }}</td>
-            <td>{{ person.birthdate }}</td>
-            <td>{{ person.birthplace }}</td>
+<section class="table__section">
+  <!-- display tables actions here in a list -->
+
+  <div class="table__section-sort">
+    <select [(ngModel)]="selectedSortValue" (change)="onSortChange()">
+      <option value="date">date</option>
+      <option value="name">name</option>
+      <option value="id">id</option>
+      <option value="birthplace">birthplace</option>
+    </select>
+  </div>
+
+  <div class="table__section-buttons">
+    actions:
+    <ul *ngFor="let item of displayedActions">
+      <li>
+        <button (click)="handleAction(item.name)">
+          {{ item.name }}
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th class="resizable" resizableColumn style="width: 100px">ID</th>
+        <th class="resizable" resizableColumn style="width: 200px">Name</th>
+        <th class="resizable" resizableColumn style="width: 150px">
+          Birthdate
+        </th>
+        <th class="resizable" resizableColumn style="width: 250px">
+          Birthplace
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Row to display total number of persons -->
+      <tr>
+        <td colspan="4" (click)="toggleIsTotalActive()" style="cursor: pointer">
+          Total Persons: {{ getTotalPersons() }}
+        </td>
+      </tr>
+      <!-- priority List -->
+      <tr *ngIf="isTotalActive && isPriorityData.length > 0">
+        <td colspan="4" (click)="togglePriorityList()">
+          Priority List {{ isPriorityData.length }}
+          <button class="toggle-button">Toggle</button>
+        </td>
+      </tr>
+      <ng-container *ngIf="isPriorityListActive">
+        <ng-container *ngFor="let date of uniquePriorityDates">
+          <tr>
+            <td colspan="4">
+              {{ date }}
+              <button class="toggle-button" (click)="toggleDate(date)">
+                Toggle
+              </button>
+            </td>
           </tr>
+          <ng-container *ngIf="dateToggleStates[date]">
+            <tr *ngFor="let person of filterPriorityDataByDate(date)">
+              <td>{{ person.id }}</td>
+              <td>{{ person.name }}</td>
+              <td>{{ person.birthdate }}</td>
+              <td>{{ person.birthplace }}</td>
+            </tr>
+          </ng-container>
         </ng-container>
       </ng-container>
-    </ng-container>
 
-    <!-- Normal List -->
-    <tr *ngIf="isTotalActive && isNormalData.length > 0">
-      <td colspan="4" (click)="toggleNormalList()">
-        Normal List {{ isNormalData.length }}
-        <button class="toggle-button">Toggle</button>
-      </td>
-    </tr>
-    <ng-container *ngIf="isNormalListActive">
-      <ng-container *ngFor="let date of uniqueNormalDates">
-        <tr>
-          <td colspan="4">
-            {{ date }}
-            <button class="toggle-button" (click)="toggleDate(date)">
-              Toggle
-            </button>
-          </td>
-        </tr>
-        <ng-container *ngIf="dateToggleStates[date]">
-          <tr *ngFor="let person of filterNormalDataByDate(date)">
-            <td>{{ person.id }}</td>
-            <td>{{ person.name }}</td>
-            <td>{{ person.birthdate }}</td>
-            <td>{{ person.birthplace }}</td>
+      <!-- Normal List -->
+      <tr *ngIf="isTotalActive && isNormalData.length > 0">
+        <td colspan="4" (click)="toggleNormalList()">
+          Normal List {{ isNormalData.length }}
+          <button class="toggle-button">Toggle</button>
+        </td>
+      </tr>
+      <ng-container *ngIf="isNormalListActive">
+        <ng-container *ngFor="let date of uniqueNormalDates">
+          <tr>
+            <td colspan="4">
+              {{ date }}
+              <button class="toggle-button" (click)="toggleDate(date)">
+                Toggle
+              </button>
+            </td>
           </tr>
+          <ng-container *ngIf="dateToggleStates[date]">
+            <tr *ngFor="let person of filterNormalDataByDate(date)">
+              <td>{{ person.id }}</td>
+              <td>{{ person.name }}</td>
+              <td>{{ person.birthdate }}</td>
+              <td>{{ person.birthplace }}</td>
+            </tr>
+          </ng-container>
         </ng-container>
       </ng-container>
-    </ng-container>
 
-    <!-- Loop through unique dates -->
-  </tbody>
-</table>
+      <!-- Loop through unique dates -->
+    </tbody>
+  </table>
+</section>

@@ -1,13 +1,25 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, HostBinding, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  HostBinding,
+  OnInit,
+} from '@angular/core';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { ResizableColumnDirective } from '../directives/resizablecolumn.directive';
+import { IActionsType, tableActions } from './actionsData';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-drop-down-dates',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, ResizableColumnDirective],
+  imports: [
+    HttpClientModule,
+    CommonModule,
+    ResizableColumnDirective,
+    FormsModule,
+  ],
   templateUrl: './drop-down-dates.component.html',
   styleUrl: './drop-down-dates.component.scss',
 })
@@ -21,16 +33,10 @@ export class DropDownDatesComponent implements OnInit {
   isPriorityData: any[] = [];
   isNormalData: any[] = [];
 
-  @HostBinding('style.width.px')
-  width: number | null = null;
+  actionsData: IActionsType[] = tableActions;
+  selectedSortValue: string = 'date';
 
-  constructor(private _http: HttpClient) {}
-
-  onColumnResize(width: number) {
-    this.width = width;
-    // Handle the width change, e.g., update the style or store the width in a variable
-    console.log('Column resized to width:', width);
-  }
+  constructor(private _http: HttpClient, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.getPersonData().subscribe(
@@ -43,6 +49,69 @@ export class DropDownDatesComponent implements OnInit {
         console.error('Error fetching data:', error);
       }
     );
+  }
+
+  get displayedActions(): IActionsType[] {
+    // Determine which actions to display based on the selected sort value
+    if (this.selectedSortValue === 'birthplace') {
+      // Replace the 'Delete' action with 'View'
+      return this.actionsData
+        .filter((action) => action.id !== 2)
+        .concat({ id: 3, name: 'View' });
+    } else if (this.selectedSortValue === 'name') {
+      // Replace the 'Delete' action with 'Download'
+      return this.actionsData
+        .filter((action) => action.id !== 2)
+        .concat({ id: 4, name: 'Download' });
+    } else {
+      // Display the default actions
+      return this.actionsData;
+    }
+  }
+
+  onSortChange(): void {
+    // Update the displayed actions when the sort value changes
+    this.displayedActions;
+    this.cdr.detectChanges();
+  }
+
+  handleAction(name: string): void {
+    if (name === 'Edit') {
+      // Handle edit action
+      console.log('Edit action clicked');
+    } else if (name === 'View') {
+      // Handle view action
+      console.log('View action clicked');
+    } else if (name === 'Delete') {
+      // Handle delete action
+      console.log('Delete action clicked');
+    } else if (name === 'Download') {
+      // Handle download action
+      console.log('Download action clicked');
+    } else {
+      // Handle unknown action (optional)
+      console.log('Unknown action clicked');
+    }
+  }
+
+  editAction(): void {
+    // Handle edit action
+    console.log('Edit action clicked');
+  }
+
+  deleteAction(): void {
+    // Handle delete action
+    console.log('Delete action clicked');
+  }
+
+  viewAction(): void {
+    // Handle view action
+    console.log('View action clicked');
+  }
+
+  downloadAction(): void {
+    // Handle download action
+    console.log('Download action clicked');
   }
 
   toggleIsTotalActive(): void {

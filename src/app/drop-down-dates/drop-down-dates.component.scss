@@ -42,3 +42,29 @@
 .resizable:hover::after {
   background: rgba(0, 0, 0, 0.1);
 }
+
+.table__section-sort {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+  background-color: aqua;
+}
+
+.table__section-buttons {
+  display: flex;
+  flex-direction: row;
+  background-color: red;
+  padding: 2rem;
+  ul {
+    li {
+      margin: 0 2rem;
+      list-style: none;
+
+      button {
+        cursor: pointer;
+        padding: 0.6rem 0.4rem;
+      }
+    }
+  }
+}
