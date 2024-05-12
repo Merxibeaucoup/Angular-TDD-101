@@ -1,217 +1,89 @@
-$color1: #343e3d;
-$color2: #607466;
-$color3: #aedcc0;
-$color4: #7bd389;
-$color5: #38e4ae;
+// .flex-container {
+//   display: flex;
+//   flex-direction: column; /* Change to column */
+// }
+// .flex-item {
+//   flex: 1 5 50%;
 
-// Layout styles
+//   border: 1px solid black;
+// }
+// .grabber {
+//   height: 10px; /* Change width to height */
+//   //   opacity: 0;
+// }
+// .grabber:hover {
+//   opacity: 1;
+//   cursor: row-resize; /* Change cursor */
+// }
+// .side-panel {
+//   background-color: lightgray;
+// }
 
-$spacing: 14px;
-$footer-height: 70px;
+// .item-1 {
+//   min-height: 400px; /* Adjust height */
+// }
 
-.content {
-  flex: 1;
-  display: flex;
-  flex-flow: column nowrap;
-  padding: $spacing / 2;
-  height: 100vh;
+// .item-2 {
+//   min-height: 400px; /* Adjust height */
+// }
+
+.home {
+  display: grid;
+  grid-template-columns: auto 1fr; /* Navbar and content */
+  grid-template-rows: auto 1fr; /* Navbar and sidebar */
+  height: 100vh; /* Full height */
+  overflow-y: hidden;
 }
 
-.content__sections {
-  position: relative; /* Required for positioning the resize handle */
+nav {
+  grid-column: 1 / span 2; /* Span both columns */
+  background-color: #333; /* Example background color */
+  color: #fff; /* Example text color */
+  padding: 10px; /* Example padding */
 }
 
-.resize-handle {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  width: 100%;
-  height: 10px; /* Adjust height as needed */
-  cursor: ns-resize; /* Set cursor to vertical resize */
-  background-color: #ccc; /* Adjust background color of the handle */
-  z-index: 999; /* Ensure the handle appears above other elements */
+aside {
+  grid-row: 2; /* Second row */
+  background-color: #555; /* Example background color */
+  color: #fff; /* Example text color */
+  padding: 10px; /* Example padding */
+  width: 200px; /* Example width */
 }
 
-.row {
-  position: relative; /* Required for positioning the resizable sections */
+.container-fluid {
+  grid-column: 2; /* Second column */
+  grid-row: 2; /* Second row */
+  margin-top: 1rem; /* Example margin-top */
 }
 
-.row:not(:last-child) {
-  margin-bottom: 10px; /* Add margin between rows */
-}
-
-.content__sections {
+.flex-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-
-  .row {
-    height: 100%;
-    width: 100%;
-  }
 }
 
-.row {
-  min-height: 50px;
-  display: flex;
-  flex-flow: column nowrap; /* Change to column layout */
-  justify-content: space-around;
-  align-items: center;
+.flex-item {
+  flex: 1 5 50%;
+  height: 600px;
+  //   border: 1px solid black;
 }
 
-section {
-  box-sizing: border-box;
-  border-radius: 10px;
-  padding: 1.25em 1.75em;
-  background: #ddd;
-  border: $spacing / 2 solid #fff;
-  flex: 1;
-  min-width: 30px;
-  height: 100%; /* Make sections fill the height */
-
-  &.resizable {
-    flex: 0 0 300px;
-  }
+.item-1 {
+  //   background-color: red;
+}
+.item-2 {
+  //   background-color: yellow;
 }
 
-#one {
-  background: $color4;
-  color: darken($color4, 30);
+.grabber {
+  height: 8px;
+  //   height: 8px;
+  //   cursor: col-resize; /* Change cursor to n-resize */
+  //   opacity: 0;
 }
 
-#two {
-  background: $color3;
-  color: darken($color3, 30);
-}
-
-#three {
-  background: $color5;
-  color: darken($color5, 30);
-}
-
-#four {
-  background: url(http://publicdomainarchive.com/wp-content/uploads/2014/12/public-domain-images-free-stock-photos-high-quality-resolution-downloads-public-domain-archive-7-1000x665.jpg);
-}
-
-footer {
-  background: white;
-  font-size: 14px;
-  text-transform: uppercase;
-  padding: 0 1.75em;
-  width: 100%;
-  margin-top: 0;
-  height: $footer-height;
-  line-height: $footer-height;
-  border-top: 1px solid $color3;
-}
-
-a {
-  position: relative;
-  text-decoration: none;
-  color: $color4;
-
-  &:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    width: 0;
-    height: 1px;
-    background-color: $color4;
-    transition: all 0.3s ease-in-out;
-  }
-
-  &:hover {
-    &:after {
-      width: 100%;
-    }
-  }
-}
-
-// Directive styles
-
-.resizable {
-  position: relative;
-
-  &.no-transition {
-    transition: none !important;
-  }
-}
-
-.rg-right,
-.rg-left,
-.rg-top,
-.rg-bottom {
-  display: block;
-  width: $spacing;
-  height: $spacing;
-  line-height: $spacing;
-  position: absolute;
-  z-index: 1;
-  user-select: none;
-
-  span {
-    position: absolute;
-    box-sizing: border-box;
-    display: block;
-    border: 1px solid #ccc;
-  }
-}
-
-.rg-right,
-.rg-left {
-  span {
-    border-width: 0 1px;
-    top: 50%;
-    margin-top: -10px;
-    margin: -10px 0 0 $spacing / 4;
-    height: 20px;
-    width: $spacing / 2;
-  }
-}
-
-.rg-top,
-.rg-bottom {
-  span {
-    border-width: 1px 0;
-    left: 50%;
-    margin: $spacing / 4 0 0 -10px;
-    width: 20px;
-    height: $spacing / 2;
-  }
-}
-
-.rg-top {
-  cursor: row-resize;
-  width: 100%;
-  top: 0;
-  left: 0;
-  margin-top: -$spacing / 2;
-}
-
-.rg-right {
-  cursor: col-resize;
-  height: 100%;
-  right: 0;
-  top: 0;
-  margin-right: -$spacing;
-}
-
-.rg-bottom {
-  cursor: row-resize;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-  margin-bottom: -$spacing / 2;
-}
-
-.rg-left {
-  cursor: col-resize;
-  height: 100%;
-  left: 0;
-  top: 0;
-  margin-left: -$spacing;
+.grabber:hover,
+.grabber:active {
+  //   background-color: #ccccccac; /* Example hover background color */
+  cursor: row-resize; /* Change cursor to n-resize */
+  border-top: thick double red;
 }

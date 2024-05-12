@@ -9,4 +9,7 @@ import { ResizableSectionDirective } from '../directives/resizeSection/resize-se
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss',
 })
-export class HomepageComponent {}
+export class HomepageComponent {
+  leftWidth = 50;
+  rightWidth = 50;
+}
