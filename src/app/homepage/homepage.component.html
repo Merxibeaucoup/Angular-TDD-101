@@ -3,18 +3,18 @@
   <aside>side</aside>
 
   <div class="flex-container">
-    <div class="flex-item item-1" #firstElement>
+    <div class="flex-item item-1" #topElement>
       <h2>Flex container-1</h2>
     </div>
     <div
       class="grabber"
       resizableSection
-      [topResize]="firstElement"
-      [bottomResize]="rightElement"
+      [topResize]="topElement"
+      [bottomResize]="bottomElement"
     >
       ...
     </div>
-    <div class="flex-item item-2" #rightElement>
+    <div class="flex-item item-2" #bottomElement>
       <h2>Flex container-2</h2>
     </div>
   </div>
