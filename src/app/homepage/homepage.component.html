@@ -1,10 +1,15 @@
-<div class="home">
+<div class="home" *ngIf="!isLoading">
   <nav>navbar</nav>
   <aside>side</aside>
 
   <div class="flex-container">
     <div class="flex-item item-1" #topElement>
       <h2>Flex container-1</h2>
+      <form [formGroup]="manualDiaryForm" (ngSubmit)="submitForm()">
+        <label for="dueDate">Due Date:</label>
+        <input type="date" id="dueDate" formControlName="dueDate" />
+        <button type="submit">Submit</button>
+      </form>
     </div>
     <div
       class="grabber"
@@ -16,6 +21,88 @@
     </div>
     <div class="flex-item item-2" #bottomElement>
       <h2>Flex container-2</h2>
+    </div>
+  </div>
+</div>
+
+<ngx-loading-bar></ngx-loading-bar>
+
+<!-- <div *ngIf="isLoading; else dataLoaded">
+  <ngx-skeleton-loader
+    count="3"
+    appearance="line"
+    animation="progress"
+    [theme]="{
+      'border-radius': '4px',
+      height: '20px'
+    }"
+  >
+  </ngx-skeleton-loader>
+</div> -->
+
+<div *ngIf="!isLoading">
+  <div *ngFor="let item of data" class="data-item">
+    {{ item.name }}
+  </div>
+</div>
+
+<div class="skeleton" *ngIf="isLoading && loading">
+  <div class="top">
+    <div class="top-logo">
+      <ngx-skeleton-loader
+        count="1"
+        appearance="circle"
+        [theme]="{
+          width: '17vw',
+          height: '95px',
+          'border-radius': '10px'
+        }"
+      >
+      </ngx-skeleton-loader>
+    </div>
+    <div class="top-bar">
+      <ngx-skeleton-loader
+        [theme]="{
+          width: '80.5vw',
+          'border-radius': '10px',
+          height: '95px',
+          'margin-top': '7px'
+        }"
+      ></ngx-skeleton-loader>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="side">
+      <ngx-skeleton-loader
+        [theme]="{
+          width: '25.5vw',
+          'border-radius': '10px',
+          height: '87vh',
+          'margin-top': '7px'
+        }"
+      ></ngx-skeleton-loader>
+    </div>
+    <div class="main">
+      <div class="main-top">
+        <ngx-skeleton-loader
+          [theme]="{
+            width: '71.5vw',
+            'border-radius': '10px',
+            height: '40vh',
+            'margin-top': '7px'
+          }"
+        ></ngx-skeleton-loader>
+      </div>
+      <div class="main-bottom">
+        <ngx-skeleton-loader
+          [theme]="{
+            width: '71.5vw',
+            'border-radius': '10px',
+            height: '45vh',
+            'margin-top': '7px'
+          }"
+        ></ngx-skeleton-loader>
+      </div>
     </div>
   </div>
 </div>

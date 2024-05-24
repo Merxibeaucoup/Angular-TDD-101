@@ -37,16 +37,16 @@
 
 nav {
   grid-column: 1 / span 2; /* Span both columns */
-  background-color: #333; /* Example background color */
+  //   background-color: #333; /* Example background color */
   color: #fff; /* Example text color */
-  padding: 10px; /* Example padding */
+  //   padding: 10px; /* Example padding */
 }
 
 aside {
   grid-row: 2; /* Second row */
   background-color: #555; /* Example background color */
   color: #fff; /* Example text color */
-  padding: 10px; /* Example padding */
+  //   padding: 10px; /* Example padding */
   width: 200px; /* Example width */
 }
 
@@ -86,4 +86,25 @@ aside {
   //   background-color: #ccccccac; /* Example hover background color */
   cursor: row-resize; /* Change cursor to n-resize */
   border-top: thick double red;
+}
+
+// skeleton styles
+
+.skeleton {
+  max-height: 100vh;
+  max-width: 100vw;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  padding: 0 0.2rem;
+}
+.top {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.bottom {
+  display: flex;
+  gap: 1.5rem;
+  padding-left: 0.5rem;
 }
